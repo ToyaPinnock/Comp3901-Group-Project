@@ -24,13 +24,25 @@ def cashMode():
 def SpeechReg():
     if request.method == "POST":
         results=request.form
+        print (results)
         for key, value in results.items():
             print(key,value)
         message = "python says hello"
         return message
     return render_template("SpeechReg.html")
 
-
+@app.route("/VideoStream", methods=["GET","POST"])
+def video():
+    print("activated")
+    if request.method == "POST":
+        results=request.form
+        for key, value in results.items():
+            # initialize camera
+            cap = cv.VideoCapture(value)
+            print(key,value)  
+        message = "video capture"
+        return message
+    return render_template("SpeechReg.html")
 
     
 

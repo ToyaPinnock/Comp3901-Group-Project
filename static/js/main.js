@@ -1,4 +1,5 @@
 const button = document.querySelector("#speech");
+const button1 = document.querySelector("#stream");
 let para = document.querySelector("#paras");
 let container = document.querySelector('#content');
 container.appendChild(para);
@@ -36,24 +37,40 @@ const dictate = () => {
     }
 
 };
+button1.addEventListener('click', () => {
 
-let canvas = document.querySelector("#canvas");
-
-let video = document.querySelector("#video");
-
-
-// if there are media devices avaiable get the video on the system
-if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-
-    navigator.mediaDevices.getUserMedia({
-        video: true
-    }).then(stream => {
-        video.srcObject = stream;
-        video.play();
-    })
-}
+    let video = document.querySelector("#video");
 
 
+    // if there are media devices avaiable get the video on the system
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+
+        navigator.mediaDevices.getUserMedia({
+            video: true
+        }).then(stream => {
+            var mediaSource = new MediaSource();
+            video.src = URL.createObjectURL(mediaSource);
+            video.srcObject = stream;
+            video.play();
+            $.ajax({
+                url: '/VideoStream',
+                type: 'POST',
+                data: { 'Url': video.src },
+                success: function(response) {
+                    const utterThis = new SpeechSynthesisUtterance(response)
+                    synth.speak(utterThis);
+
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+            e.preventDefault();
+
+        })
+    }
+
+});
 
 
 

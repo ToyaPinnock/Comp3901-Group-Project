@@ -12,18 +12,18 @@
 <form  action="/SpeechRecognition" method="post">
     <div id="content" class="Speechcss">
         <p id= "paras"> Speak your command</p>
-        <button id="speech" class="btn btn-primary btn-xl" type="button">START</button>
+        <button id="speech" class="btn btn-primary btn-xl" type="button">Send command</button>
         
     </div>
 </form>
-<div>
-  <video id="video" width="640" height="480" autoplay></video>
-  <button id="snap" class="btn btn-primary btn-xl "> Take Photo</button>
-  <canvas id="canvas" width="640" height="480"></canvas>
- 
-</div>
 
+<form  action="/VideoStream" method="post">
+  <div>
+    <video id="video" width="540" height="480" autoplay></video><br />
+    <button id="stream" class="btn btn-primary btn-xl" type="button">Send video</button>
+  </div>
 
+</form>
 
 
 
